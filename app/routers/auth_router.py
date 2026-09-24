@@ -3,7 +3,7 @@ from fastapi.security import OAuth2PasswordRequestForm
 from ..database import get_connection
 from ..models import UsuarioRegistro, Token
 from ..auth import hashear_password, verificar_password, crear_token
-import psycopg2
+import psycopg 
 
 router = APIRouter(tags=["Autenticación"])
 
@@ -19,7 +19,7 @@ def registrar_usuario(usuario: UsuarioRegistro):
         )
         nuevo_id = cur.fetchone()["id"]
         conn.commit()
-    except psycopg2.errors.UniqueViolation:
+    except psycopg.errors.UniqueViolation:
         conn.rollback()
         raise HTTPException(status_code=400, detail="El nombre de usuario ya existe")
     finally:
