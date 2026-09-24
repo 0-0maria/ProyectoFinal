@@ -1,6 +1,6 @@
 import os
-import psycopg2
-from psycopg2.extras import RealDictCursor
+import psycopg
+from psycopg.extras import RealDictCursor
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -8,7 +8,7 @@ load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 def get_connection():
-    return psycopg2.connect(DATABASE_URL, cursor_factory=RealDictCursor)
+    return psycopg.connect(DATABASE_URL, cursor_factory=RealDictCursor)
 
 def crear_tablas():
     conn = get_connection()
